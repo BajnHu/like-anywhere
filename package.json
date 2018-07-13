@@ -1,0 +1,29 @@
+{
+  "name": "anydoor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "supervisor src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/objectBao/anyDoor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/objectBao/anyDoor/issues"
+  },
+  "homepage": "https://github.com/objectBao/anyDoor#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "eslint": "^5.1.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "handlebars": "^4.0.11",
+    "mime-types": "^2.1.18"
+  }
+}
