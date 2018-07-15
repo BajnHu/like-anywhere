@@ -7,6 +7,7 @@ const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
 const compress = require('./compress')
 const range = require('./range')
+const isFresh = require('./cache')
 
 
 const tplPath = path.join(__dirname, '../template/dir.tpl')
@@ -20,6 +21,13 @@ module.exports = async function (req, res, filePath, conf) {
             // let extname = path.extname(filePath).split('.').pop().toLowerCase()
             let mimeType = Mime.contentType(filePath)
             res.setHeader('Content-Type', mimeType)
+
+            if (isFresh(stats, req, res)) {
+                res.statusCode = 304
+                res.end()
+                return
+            }
+
             let rs
             let {code, start, end} = range(stats.size, req, res)
 
@@ -71,9 +79,9 @@ module.exports = async function (req, res, filePath, conf) {
             })
         }
     } catch (err) {
-        console.info('err:' + err)
         res.statusCode = 404
         res.setHeader('Content-Type', 'text/plain')
+        console.log('err:' + err)
         res.end(`${filePath} is not a directory or file !`)
     }
 }
