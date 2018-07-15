@@ -7,6 +7,7 @@ const conf = require('../config/defaultConfig')
 const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
 const compress = require('./compress')
+const range = require('./range')
 
 
 const tplPath = path.join(__dirname, '../template/dir.tpl')
@@ -16,13 +17,25 @@ const template = Handlebars.compile(source.toString())
 module.exports = async function (req, res, filePath) {
   try {
     let stats = await stat(filePath)
-    res.statusCode = 200
     if (stats.isFile()) {
-      let extname = path.extname(filePath).split('.').pop().toLowerCase()
+      // let extname = path.extname(filePath).split('.').pop().toLowerCase()
       let mimeType = Mime.contentType(filePath)
       res.setHeader('Content-Type', mimeType)
-      // 以流的方式读取文件，边读边 输出
-      let rs = fs.createReadStream(filePath)
+      let rs
+      let {code, start, end} = range(stats.size, req, res)
+
+      if(code === 200)  {
+          // 以流的方式读取文件，边读边 输出
+          res.statusCode = code
+          rs = fs.createReadStream(filePath)
+      }else {
+          res.statusCode = code
+          rs = fs.createReadStream(filePath,{
+            start,
+            end
+          })
+      }
+
       if (filePath.toString().match(conf.compress)) {
         rs = compress(rs, req, res)
       }
@@ -39,8 +52,6 @@ module.exports = async function (req, res, filePath) {
         title: path.basename(filePath),
         dir: dir ? `/${dir}` : ''
       }
-      console.log(prevPath)
-
       data.files = []
       files.map((file,idx) => {
         let filePt =path.join(filePath, file)
