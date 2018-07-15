@@ -1,10 +1,10 @@
 {
-  "name": "anypath",
+  "name": "like-anywhere",
   "version": "0.0.1",
   "description": "thiny nodejs web server",
   "main": "src/app.js",
-  "bin":{
-    "anypath":"bing/anypath"
+  "bin": {
+    "like-anywhere": "bing/like-anywhere"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/objectBao/anypath.git"
+    "url": "git+https://github.com/objectBao/like-anywhere.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/objectBao/anypath/issues"
+    "url": "https://github.com/objectBao/like-anywhere/issues"
   },
-  "homepage": "https://github.com/objectBao/anypath#readme",
+  "homepage": "https://github.com/objectBao/like-anywhere#readme",
   "devDependencies": {
     "babel-eslint": "^8.2.5",
     "eslint": "^5.1.0"

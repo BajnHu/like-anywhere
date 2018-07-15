@@ -3,7 +3,7 @@ const Server = require('./app')
 
 
 const argv = yargs
-    .usage('anypath [options]')
+    .usage('like-anywhere [options]')
     .option('p', {
         alias: 'port',
         describe: 'port',
