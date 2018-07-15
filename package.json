@@ -1,6 +1,6 @@
 {
   "name": "like-anywhere",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "thiny nodejs web server",
   "main": "src/app.js",
   "bin": {
