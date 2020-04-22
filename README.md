@@ -1,6 +1,6 @@
 # like-anywhere
 
-Tiny NodeJs Static WebServer
+Tiny NodeJs Static WebServer.
 
 ##安装
 
